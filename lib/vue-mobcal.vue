@@ -41,7 +41,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="(week, index) in getDates(slideDate)" :key="index">
-                    <td v-for="(date, i) in week" :key="i" @click="activeDate = date" :class="{
+                    <td v-for="(date, i) in week" :key="i" @click="onTimeChange(date, i)" :class="{
                       'is-today': isToday(date),
                       'is-active-day': isActiveDay(date),
                       'is-work-day': isWorkDay(date),
@@ -49,8 +49,7 @@
                     }">
                       <div class="detail">
                         <slot name="day" :date="date" :util="util">
-                          <span>{{ isToday(date) ? '今' : date.getDate()}}</span>
-                          <!-- <span class="mindot"></span> -->
+                          <span>{{ date.getDate() }}</span>
                           <span class="dot"></span>
                         </slot>
                       </div>
@@ -172,7 +171,6 @@ export default {
       return `${date.getFullYear()}年`
     },
     monthFilter (date) {
-      console.log('123', date)
       return `${date.getMonth() + 1}月`
     },
     weekFilter (day) {
@@ -282,6 +280,10 @@ export default {
       this.calSwiper.slideNext()
       this.$emit('onNext')
     },
+    onTimeChange(date) {
+      this.activeDate = date
+      this.$emit('onChange', date)
+    },
     onChangeMode (mode = false) {
       if (typeof mode === 'boolean' && mode) {
         if (['month', 'week'].indexOf(mode) !== -1) {
@@ -310,17 +312,17 @@ export default {
     },
     currentTime (val, prev) {
       // 如果用户通过 v-model 更新日期,将不更新 activeDate 以免造成 $emit 死循环
-      if (this.currentMode === 'month') {
-        if (val.getMonth() !== this.activeDate.getMonth()) {
-          this.activeDate = val
-        }
-      }
-      if (this.currentMode === 'week') {
-        const monday = this.getMonday(val)
-        if (+monday !== +this.getMonday(new Date()) || +this.getMonday(this.activeDate) !== +monday) {
-          this.activeDate = val
-        }
-      }
+      // if (this.currentMode === 'month') {
+      //   if (val.getMonth() !== this.activeDate.getMonth()) {
+      //     this.activeDate = val
+      //   }
+      // }
+      // if (this.currentMode === 'week') {
+      //   const monday = this.getMonday(val)
+      //   if (+monday !== +this.getMonday(new Date()) || +this.getMonday(this.activeDate) !== +monday) {
+      //     this.activeDate = val
+      //   }
+      // }
 
       this.updateSwiper()
     },

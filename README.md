@@ -46,27 +46,6 @@ export default {
 }
 ```
 
-### CDN
-
-``` html
-<script src="https://cdn.jsdelivr.net/npm/vue@3.2.1/dist/vue.global.js"></script>
-<script type="text/javascript" src="https://unpkg.com/vue-mobcal3/dist/vue-mobcal3.umd.js"></script>
-
-<div id="app">
-  <vue-mob-cal v-model:value="currentDate" v-model:mode="mode">
-  </vue-mob-cal>
-</div>
-<script type="text/javascript">
-  new Vue({
-      el: '#app',
-      data: {
-          mode: 'month',
-          currentDate: new Date()
-      }
-  })
-</script>
-```
-
 ### Usage
 #### Basic Usage
 ```html
@@ -74,6 +53,7 @@ export default {
 ```
 ```js
 import { VueMobCal } from 'vue-mobcal3';
+import "vue-mobcal3/dist/index.css";
 import { ref } from 'vue';
 
 export default {
@@ -126,8 +106,6 @@ export default {
 }
 ```
 
-
-
 ### API
 
 #### Props
@@ -154,9 +132,31 @@ export default {
 | :----- | :---- | :---- |
 | onPrev | Change to last month/week | - |
 | onNext | Change to next month/week | - |
+| onChange | When the time is selected, it will be triggered and returns the Date() object of the selected time. | - |
 | onChangeMode | Toggles display mode or set display mode | <span class="t">mode:!string</span> |
 
 ---
+
+### CDN
+
+``` html
+<script src="https://cdn.jsdelivr.net/npm/vue@3.2.1/dist/vue.global.js"></script>
+<script type="text/javascript" src="https://unpkg.com/vue-mobcal3/dist/vue-mobcal3.umd.js"></script>
+
+<div id="app">
+  <vue-mob-cal v-model:value="currentDate" v-model:mode="mode">
+  </vue-mob-cal>
+</div>
+<script type="text/javascript">
+  new Vue({
+      el: '#app',
+      data: {
+          mode: 'month',
+          currentDate: new Date()
+      }
+  })
+</script>
+```
 
 ### Changelog
 
