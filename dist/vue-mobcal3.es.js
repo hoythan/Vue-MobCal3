@@ -2513,7 +2513,7 @@ const ws = function(e) {
 };
 typeof window < "u" && window.Vue && window.Vue.createApp({}).component("VueMobCal", le);
 const Ss = {
-  version: "1.0.0",
+  version: "1.0.1",
   install: ws,
   VueMobCal: le
 };
